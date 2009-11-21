@@ -3,19 +3,19 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000118  00000000  00000000  00000094  2**0
+  0 .text         00000240  00000000  00000000  00000094  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00000118  000001ac  2**0
+  1 .data         00000000  00800060  00000240  000002d4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000000  00800060  00000118  000001ac  2**0
+  2 .bss          00000000  00800060  00000240  000002d4  2**0
                   ALLOC
-  3 .noinit       00000000  00800060  00800060  000001ac  2**0
+  3 .noinit       00000000  00800060  00800060  000002d4  2**0
                   CONTENTS
-  4 .eeprom       00000000  00810000  00810000  000001ac  2**0
+  4 .eeprom       00000000  00810000  00810000  000002d4  2**0
                   CONTENTS
-  5 .stab         00000360  00000000  00000000  000001ac  2**2
+  5 .stab         00000360  00000000  00000000  000002d4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  6 .stabstr      00000059  00000000  00000000  0000050c  2**0
+  6 .stabstr      00000059  00000000  00000000  00000634  2**0
                   CONTENTS, READONLY, DEBUGGING
 Disassembly of section .text:
 
@@ -46,8 +46,8 @@ Disassembly of section .text:
   26:	10 e0       	ldi	r17, 0x00	; 0
   28:	a0 e6       	ldi	r26, 0x60	; 96
   2a:	b0 e0       	ldi	r27, 0x00	; 0
-  2c:	e8 e1       	ldi	r30, 0x18	; 24
-  2e:	f1 e0       	ldi	r31, 0x01	; 1
+  2c:	e0 e4       	ldi	r30, 0x40	; 64
+  2e:	f2 e0       	ldi	r31, 0x02	; 2
   30:	03 c0       	rjmp	.+6      	; 0x38 <.do_copy_data_start>
 
 00000032 <.do_copy_data_loop>:
@@ -74,7 +74,7 @@ Disassembly of section .text:
   4a:	b1 07       	cpc	r27, r17
   4c:	e1 f7       	brne	.-8      	; 0x46 <.do_clear_bss_loop>
   4e:	36 d0       	rcall	.+108    	; 0xbc <main>
-  50:	62 c0       	rjmp	.+196    	; 0x116 <_exit>
+  50:	f6 c0       	rjmp	.+492    	; 0x23e <_exit>
 
 00000052 <__bad_interrupt>:
   52:	d6 cf       	rjmp	.-84     	; 0x0 <__heap_end>
@@ -147,40 +147,188 @@ Disassembly of section .text:
   cc:	81 e0       	ldi	r24, 0x01	; 1
   ce:	c2 df       	rcall	.-124    	; 0x54 <pinMode>
   d0:	61 e0       	ldi	r22, 0x01	; 1
-  d2:	80 e0       	ldi	r24, 0x00	; 0
-  d4:	d9 df       	rcall	.-78     	; 0x88 <digitalWrite>
-  d6:	28 ee       	ldi	r18, 0xE8	; 232
-  d8:	33 e0       	ldi	r19, 0x03	; 3
-  da:	e8 ec       	ldi	r30, 0xC8	; 200
-  dc:	f0 e0       	ldi	r31, 0x00	; 0
-  de:	8e 2f       	mov	r24, r30
-  e0:	9f 2f       	mov	r25, r31
-  e2:	01 97       	sbiw	r24, 0x01	; 1
-  e4:	f1 f7       	brne	.-4      	; 0xe2 <__stack+0x3>
-  e6:	21 50       	subi	r18, 0x01	; 1
-  e8:	30 40       	sbci	r19, 0x00	; 0
-  ea:	c9 f7       	brne	.-14     	; 0xde <main+0x22>
-  ec:	60 e0       	ldi	r22, 0x00	; 0
-  ee:	80 e0       	ldi	r24, 0x00	; 0
-  f0:	cb df       	rcall	.-106    	; 0x88 <digitalWrite>
-  f2:	61 e0       	ldi	r22, 0x01	; 1
-  f4:	81 e0       	ldi	r24, 0x01	; 1
-  f6:	c8 df       	rcall	.-112    	; 0x88 <digitalWrite>
-  f8:	28 ee       	ldi	r18, 0xE8	; 232
-  fa:	33 e0       	ldi	r19, 0x03	; 3
-  fc:	e8 ec       	ldi	r30, 0xC8	; 200
-  fe:	f0 e0       	ldi	r31, 0x00	; 0
- 100:	8e 2f       	mov	r24, r30
- 102:	9f 2f       	mov	r25, r31
- 104:	01 97       	sbiw	r24, 0x01	; 1
- 106:	f1 f7       	brne	.-4      	; 0x104 <__stack+0x25>
- 108:	21 50       	subi	r18, 0x01	; 1
- 10a:	30 40       	sbci	r19, 0x00	; 0
- 10c:	c9 f7       	brne	.-14     	; 0x100 <__stack+0x21>
- 10e:	60 e0       	ldi	r22, 0x00	; 0
- 110:	81 e0       	ldi	r24, 0x01	; 1
- 112:	ba df       	rcall	.-140    	; 0x88 <digitalWrite>
- 114:	dd cf       	rjmp	.-70     	; 0xd0 <main+0x14>
+  d2:	82 e0       	ldi	r24, 0x02	; 2
+  d4:	bf df       	rcall	.-130    	; 0x54 <pinMode>
+  d6:	61 e0       	ldi	r22, 0x01	; 1
+  d8:	83 e0       	ldi	r24, 0x03	; 3
+  da:	bc df       	rcall	.-136    	; 0x54 <pinMode>
+  dc:	61 e0       	ldi	r22, 0x01	; 1
+  de:	84 e0       	ldi	r24, 0x04	; 4
+  e0:	b9 df       	rcall	.-142    	; 0x54 <pinMode>
+  e2:	61 e0       	ldi	r22, 0x01	; 1
+  e4:	85 e0       	ldi	r24, 0x05	; 5
+  e6:	b6 df       	rcall	.-148    	; 0x54 <pinMode>
+  e8:	61 e0       	ldi	r22, 0x01	; 1
+  ea:	80 e0       	ldi	r24, 0x00	; 0
+  ec:	cd df       	rcall	.-102    	; 0x88 <digitalWrite>
+  ee:	28 ee       	ldi	r18, 0xE8	; 232
+  f0:	33 e0       	ldi	r19, 0x03	; 3
+  f2:	e8 ec       	ldi	r30, 0xC8	; 200
+  f4:	f0 e0       	ldi	r31, 0x00	; 0
+  f6:	8e 2f       	mov	r24, r30
+  f8:	9f 2f       	mov	r25, r31
+  fa:	01 97       	sbiw	r24, 0x01	; 1
+  fc:	f1 f7       	brne	.-4      	; 0xfa <__stack+0x1b>
+  fe:	21 50       	subi	r18, 0x01	; 1
+ 100:	30 40       	sbci	r19, 0x00	; 0
+ 102:	c9 f7       	brne	.-14     	; 0xf6 <__stack+0x17>
+ 104:	60 e0       	ldi	r22, 0x00	; 0
+ 106:	80 e0       	ldi	r24, 0x00	; 0
+ 108:	bf df       	rcall	.-130    	; 0x88 <digitalWrite>
+ 10a:	61 e0       	ldi	r22, 0x01	; 1
+ 10c:	81 e0       	ldi	r24, 0x01	; 1
+ 10e:	bc df       	rcall	.-136    	; 0x88 <digitalWrite>
+ 110:	28 ee       	ldi	r18, 0xE8	; 232
+ 112:	33 e0       	ldi	r19, 0x03	; 3
+ 114:	e8 ec       	ldi	r30, 0xC8	; 200
+ 116:	f0 e0       	ldi	r31, 0x00	; 0
+ 118:	8e 2f       	mov	r24, r30
+ 11a:	9f 2f       	mov	r25, r31
+ 11c:	01 97       	sbiw	r24, 0x01	; 1
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <__stack+0x3d>
+ 120:	21 50       	subi	r18, 0x01	; 1
+ 122:	30 40       	sbci	r19, 0x00	; 0
+ 124:	c9 f7       	brne	.-14     	; 0x118 <__stack+0x39>
+ 126:	60 e0       	ldi	r22, 0x00	; 0
+ 128:	81 e0       	ldi	r24, 0x01	; 1
+ 12a:	ae df       	rcall	.-164    	; 0x88 <digitalWrite>
+ 12c:	61 e0       	ldi	r22, 0x01	; 1
+ 12e:	82 e0       	ldi	r24, 0x02	; 2
+ 130:	ab df       	rcall	.-170    	; 0x88 <digitalWrite>
+ 132:	28 ee       	ldi	r18, 0xE8	; 232
+ 134:	33 e0       	ldi	r19, 0x03	; 3
+ 136:	e8 ec       	ldi	r30, 0xC8	; 200
+ 138:	f0 e0       	ldi	r31, 0x00	; 0
+ 13a:	8e 2f       	mov	r24, r30
+ 13c:	9f 2f       	mov	r25, r31
+ 13e:	01 97       	sbiw	r24, 0x01	; 1
+ 140:	f1 f7       	brne	.-4      	; 0x13e <__stack+0x5f>
+ 142:	21 50       	subi	r18, 0x01	; 1
+ 144:	30 40       	sbci	r19, 0x00	; 0
+ 146:	c9 f7       	brne	.-14     	; 0x13a <__stack+0x5b>
+ 148:	60 e0       	ldi	r22, 0x00	; 0
+ 14a:	82 e0       	ldi	r24, 0x02	; 2
+ 14c:	9d df       	rcall	.-198    	; 0x88 <digitalWrite>
+ 14e:	61 e0       	ldi	r22, 0x01	; 1
+ 150:	83 e0       	ldi	r24, 0x03	; 3
+ 152:	9a df       	rcall	.-204    	; 0x88 <digitalWrite>
+ 154:	28 ee       	ldi	r18, 0xE8	; 232
+ 156:	33 e0       	ldi	r19, 0x03	; 3
+ 158:	e8 ec       	ldi	r30, 0xC8	; 200
+ 15a:	f0 e0       	ldi	r31, 0x00	; 0
+ 15c:	8e 2f       	mov	r24, r30
+ 15e:	9f 2f       	mov	r25, r31
+ 160:	01 97       	sbiw	r24, 0x01	; 1
+ 162:	f1 f7       	brne	.-4      	; 0x160 <__stack+0x81>
+ 164:	21 50       	subi	r18, 0x01	; 1
+ 166:	30 40       	sbci	r19, 0x00	; 0
+ 168:	c9 f7       	brne	.-14     	; 0x15c <__stack+0x7d>
+ 16a:	60 e0       	ldi	r22, 0x00	; 0
+ 16c:	83 e0       	ldi	r24, 0x03	; 3
+ 16e:	8c df       	rcall	.-232    	; 0x88 <digitalWrite>
+ 170:	61 e0       	ldi	r22, 0x01	; 1
+ 172:	84 e0       	ldi	r24, 0x04	; 4
+ 174:	89 df       	rcall	.-238    	; 0x88 <digitalWrite>
+ 176:	28 ee       	ldi	r18, 0xE8	; 232
+ 178:	33 e0       	ldi	r19, 0x03	; 3
+ 17a:	e8 ec       	ldi	r30, 0xC8	; 200
+ 17c:	f0 e0       	ldi	r31, 0x00	; 0
+ 17e:	8e 2f       	mov	r24, r30
+ 180:	9f 2f       	mov	r25, r31
+ 182:	01 97       	sbiw	r24, 0x01	; 1
+ 184:	f1 f7       	brne	.-4      	; 0x182 <__stack+0xa3>
+ 186:	21 50       	subi	r18, 0x01	; 1
+ 188:	30 40       	sbci	r19, 0x00	; 0
+ 18a:	c9 f7       	brne	.-14     	; 0x17e <__stack+0x9f>
+ 18c:	60 e0       	ldi	r22, 0x00	; 0
+ 18e:	84 e0       	ldi	r24, 0x04	; 4
+ 190:	7b df       	rcall	.-266    	; 0x88 <digitalWrite>
+ 192:	61 e0       	ldi	r22, 0x01	; 1
+ 194:	85 e0       	ldi	r24, 0x05	; 5
+ 196:	78 df       	rcall	.-272    	; 0x88 <digitalWrite>
+ 198:	28 ee       	ldi	r18, 0xE8	; 232
+ 19a:	33 e0       	ldi	r19, 0x03	; 3
+ 19c:	e8 ec       	ldi	r30, 0xC8	; 200
+ 19e:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a0:	8e 2f       	mov	r24, r30
+ 1a2:	9f 2f       	mov	r25, r31
+ 1a4:	01 97       	sbiw	r24, 0x01	; 1
+ 1a6:	f1 f7       	brne	.-4      	; 0x1a4 <__stack+0xc5>
+ 1a8:	21 50       	subi	r18, 0x01	; 1
+ 1aa:	30 40       	sbci	r19, 0x00	; 0
+ 1ac:	c9 f7       	brne	.-14     	; 0x1a0 <__stack+0xc1>
+ 1ae:	60 e0       	ldi	r22, 0x00	; 0
+ 1b0:	85 e0       	ldi	r24, 0x05	; 5
+ 1b2:	6a df       	rcall	.-300    	; 0x88 <digitalWrite>
+ 1b4:	61 e0       	ldi	r22, 0x01	; 1
+ 1b6:	84 e0       	ldi	r24, 0x04	; 4
+ 1b8:	67 df       	rcall	.-306    	; 0x88 <digitalWrite>
+ 1ba:	28 ee       	ldi	r18, 0xE8	; 232
+ 1bc:	33 e0       	ldi	r19, 0x03	; 3
+ 1be:	e8 ec       	ldi	r30, 0xC8	; 200
+ 1c0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c2:	8e 2f       	mov	r24, r30
+ 1c4:	9f 2f       	mov	r25, r31
+ 1c6:	01 97       	sbiw	r24, 0x01	; 1
+ 1c8:	f1 f7       	brne	.-4      	; 0x1c6 <__stack+0xe7>
+ 1ca:	21 50       	subi	r18, 0x01	; 1
+ 1cc:	30 40       	sbci	r19, 0x00	; 0
+ 1ce:	c9 f7       	brne	.-14     	; 0x1c2 <__stack+0xe3>
+ 1d0:	60 e0       	ldi	r22, 0x00	; 0
+ 1d2:	84 e0       	ldi	r24, 0x04	; 4
+ 1d4:	59 df       	rcall	.-334    	; 0x88 <digitalWrite>
+ 1d6:	61 e0       	ldi	r22, 0x01	; 1
+ 1d8:	83 e0       	ldi	r24, 0x03	; 3
+ 1da:	56 df       	rcall	.-340    	; 0x88 <digitalWrite>
+ 1dc:	28 ee       	ldi	r18, 0xE8	; 232
+ 1de:	33 e0       	ldi	r19, 0x03	; 3
+ 1e0:	e8 ec       	ldi	r30, 0xC8	; 200
+ 1e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e4:	8e 2f       	mov	r24, r30
+ 1e6:	9f 2f       	mov	r25, r31
+ 1e8:	01 97       	sbiw	r24, 0x01	; 1
+ 1ea:	f1 f7       	brne	.-4      	; 0x1e8 <__stack+0x109>
+ 1ec:	21 50       	subi	r18, 0x01	; 1
+ 1ee:	30 40       	sbci	r19, 0x00	; 0
+ 1f0:	c9 f7       	brne	.-14     	; 0x1e4 <__stack+0x105>
+ 1f2:	60 e0       	ldi	r22, 0x00	; 0
+ 1f4:	83 e0       	ldi	r24, 0x03	; 3
+ 1f6:	48 df       	rcall	.-368    	; 0x88 <digitalWrite>
+ 1f8:	61 e0       	ldi	r22, 0x01	; 1
+ 1fa:	82 e0       	ldi	r24, 0x02	; 2
+ 1fc:	45 df       	rcall	.-374    	; 0x88 <digitalWrite>
+ 1fe:	28 ee       	ldi	r18, 0xE8	; 232
+ 200:	33 e0       	ldi	r19, 0x03	; 3
+ 202:	e8 ec       	ldi	r30, 0xC8	; 200
+ 204:	f0 e0       	ldi	r31, 0x00	; 0
+ 206:	8e 2f       	mov	r24, r30
+ 208:	9f 2f       	mov	r25, r31
+ 20a:	01 97       	sbiw	r24, 0x01	; 1
+ 20c:	f1 f7       	brne	.-4      	; 0x20a <__stack+0x12b>
+ 20e:	21 50       	subi	r18, 0x01	; 1
+ 210:	30 40       	sbci	r19, 0x00	; 0
+ 212:	c9 f7       	brne	.-14     	; 0x206 <__stack+0x127>
+ 214:	60 e0       	ldi	r22, 0x00	; 0
+ 216:	82 e0       	ldi	r24, 0x02	; 2
+ 218:	37 df       	rcall	.-402    	; 0x88 <digitalWrite>
+ 21a:	61 e0       	ldi	r22, 0x01	; 1
+ 21c:	81 e0       	ldi	r24, 0x01	; 1
+ 21e:	34 df       	rcall	.-408    	; 0x88 <digitalWrite>
+ 220:	28 ee       	ldi	r18, 0xE8	; 232
+ 222:	33 e0       	ldi	r19, 0x03	; 3
+ 224:	e8 ec       	ldi	r30, 0xC8	; 200
+ 226:	f0 e0       	ldi	r31, 0x00	; 0
+ 228:	8e 2f       	mov	r24, r30
+ 22a:	9f 2f       	mov	r25, r31
+ 22c:	01 97       	sbiw	r24, 0x01	; 1
+ 22e:	f1 f7       	brne	.-4      	; 0x22c <__stack+0x14d>
+ 230:	21 50       	subi	r18, 0x01	; 1
+ 232:	30 40       	sbci	r19, 0x00	; 0
+ 234:	c9 f7       	brne	.-14     	; 0x228 <__stack+0x149>
+ 236:	60 e0       	ldi	r22, 0x00	; 0
+ 238:	81 e0       	ldi	r24, 0x01	; 1
+ 23a:	26 df       	rcall	.-436    	; 0x88 <digitalWrite>
+ 23c:	55 cf       	rjmp	.-342    	; 0xe8 <__stack+0x9>
 
-00000116 <_exit>:
- 116:	ff cf       	rjmp	.-2      	; 0x116 <_exit>
+0000023e <_exit>:
+ 23e:	ff cf       	rjmp	.-2      	; 0x23e <_exit>
